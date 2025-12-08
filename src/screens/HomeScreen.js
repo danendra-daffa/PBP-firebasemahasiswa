@@ -1,6 +1,6 @@
 /**
  * HomeScreen.js
- * Simple header added by Danendra Daffa to show ownership without changing logic.
+ * Restyled by Danendra Daffa — Deep Purple & Teal Modern Theme (2025 Edition)
  */
 import React, { useState, useEffect } from 'react';
 import {
@@ -31,13 +31,11 @@ const HomeScreen = ({ navigation }) => {
   const loadMahasiswa = async () => {
     setLoading(true);
     const result = await fetchMahasiswa();
-
     if (result.success) {
       setMahasiswaList(result.data);
     } else {
       Alert.alert('Error', result.error);
     }
-
     setLoading(false);
   };
 
@@ -48,18 +46,15 @@ const HomeScreen = ({ navigation }) => {
   };
 
   const handleLogout = async () => {
-    Alert.alert('Konfirmasi', 'Apakah yakin ingin keluar?', [
+    Alert.alert('Konfirmasi', 'Yakin ingin keluar?', [
       { text: 'Batal', style: 'cancel' },
       {
         text: 'Keluar',
         style: 'destructive',
         onPress: async () => {
           const result = await logoutUser();
-          if (result.success) {
-            navigation.replace('Login');
-          } else {
-            Alert.alert('Error', result.error);
-          }
+          if (result.success) navigation.replace('Login');
+          else Alert.alert('Error', result.error);
         },
       },
     ]);
@@ -73,12 +68,13 @@ const HomeScreen = ({ navigation }) => {
           <Text style={styles.semesterText}>Sem {item.semester}</Text>
         </View>
       </View>
+
       <View style={styles.cardBody}>
         <View style={styles.infoRow}>
           <Text style={styles.infoLabel}>NIM</Text>
           <Text style={styles.infoValue}>{item.nim}</Text>
         </View>
-        <View style={styles.infoDivider} />
+        <View style={styles.divider} />
         <View style={styles.infoRow}>
           <Text style={styles.infoLabel}>Jurusan</Text>
           <Text style={styles.infoValue}>{item.jurusan}</Text>
@@ -89,19 +85,17 @@ const HomeScreen = ({ navigation }) => {
 
   const renderEmpty = () => (
     <View style={styles.emptyContainer}>
-      <Text style={styles.emptyTitle}>Belum Ada Data</Text>
-      <Text style={styles.emptySubtitle}>
-        Data mahasiswa akan muncul di sini
-      </Text>
+      <Text style={styles.emptyTitle}>Data Kosong</Text>
+      <Text style={styles.emptySubtitle}>Belum ada mahasiswa terdaftar</Text>
       <TouchableOpacity style={styles.retryButton} onPress={loadMahasiswa}>
-        <Text style={styles.retryButtonText}>Muat Ulang</Text>
+        <Text style={styles.retryButtonText}>Coba Lagi</Text>
       </TouchableOpacity>
     </View>
   );
 
   return (
     <>
-      <StatusBar barStyle="light-content" backgroundColor="#d6306d" />
+      <StatusBar barStyle="light-content" backgroundColor="#6d28d9" />
       <View style={styles.container}>
         {/* Header */}
         <View style={styles.header}>
@@ -114,34 +108,34 @@ const HomeScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
 
-        {/* Content */}
+        {/* Body */}
         {loading && !refreshing ? (
           <View style={styles.loadingContainer}>
-            <ActivityIndicator size="large" color="#d6306d" />
+            <ActivityIndicator size="large" color="#6d28d9" />
             <Text style={styles.loadingText}>Memuat data...</Text>
           </View>
         ) : (
           <FlatList
             data={mahasiswaList}
             renderItem={renderMahasiswa}
-            keyExtractor={item => item.id}
+            keyExtractor={(item) => item.id}
             contentContainerStyle={styles.list}
             ListEmptyComponent={renderEmpty}
             ListHeaderComponent={
-              mahasiswaList.length > 0 ? (
+              mahasiswaList.length > 0 && (
                 <View style={styles.listHeader}>
                   <Text style={styles.listHeaderText}>
-                    {mahasiswaList.length} mahasiswa terdaftar
+                    {mahasiswaList.length} mahasiswa ditemukan
                   </Text>
                 </View>
-              ) : null
+              )
             }
             refreshControl={
               <RefreshControl
                 refreshing={refreshing}
                 onRefresh={onRefresh}
-                colors={['#d6306d']}
-                tintColor="#d6306d"
+                colors={['#6d28d9']}
+                tintColor="#6d28d9"
               />
             }
             showsVerticalScrollIndicator={false}
@@ -153,156 +147,105 @@ const HomeScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff5f9',
-  },
+  container: { flex: 1, backgroundColor: '#f8f5ff' },
   header: {
-    backgroundColor: '#d6306d',
+    backgroundColor: '#6d28d9',        // Deep Purple
     paddingHorizontal: 20,
     paddingTop: 50,
-    paddingBottom: 20,
+    paddingBottom: 24,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    shadowColor: '#d6306d',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.25,
-    shadowRadius: 8,
-    elevation: 5,
+    borderBottomLeftRadius: 24,
+    borderBottomRightRadius: 24,
+    elevation: 8,
+    shadowColor: '#6d28d9',
   },
   headerTitle: {
-    fontSize: 22,
+    fontSize: 24,
     fontWeight: '800',
     color: '#fff',
-    letterSpacing: -0.3,
   },
   headerSubtitle: {
     fontSize: 13,
-    color: '#ffc0da',
+    color: '#e9d5ff',
     marginTop: 4,
   },
   logoutButton: {
+    backgroundColor: 'rgba(255,255,255,0.2)',
     paddingHorizontal: 16,
-    paddingVertical: 8,
-    backgroundColor: 'rgba(255,255,255,0.25)',
-    borderRadius: 8,
+    paddingVertical: 10,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.3)',
   },
-  logoutButtonText: {
-    color: '#fff',
-    fontSize: 14,
-    fontWeight: '600',
-  },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  loadingText: {
-    marginTop: 12,
-    color: '#d6306d',
-    fontSize: 14,
-  },
-  list: {
-    padding: 16,
-  },
-  listHeader: {
-    marginBottom: 12,
-  },
-  listHeaderText: {
-    fontSize: 14,
-    color: '#d6306d',
-    fontWeight: '500',
-  },
+  logoutButtonText: { color: '#fff', fontWeight: '700', fontSize: 14 },
+
+  loadingContainer: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  loadingText: { marginTop: 16, color: '#6d28d9', fontSize: 15 },
+
+  list: { padding: 16 },
+  listHeader: { marginBottom: 12 },
+  listHeaderText: { fontSize: 15, color: '#6d28d9', fontWeight: '600' },
+
   card: {
     backgroundColor: '#fff',
-    borderRadius: 16,
-    marginBottom: 12,
-    borderWidth: 0,
-    shadowColor: '#d6306d',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 6,
-    elevation: 2,
+    borderRadius: 20,
+    marginBottom: 14,
+    padding: 16,
+    shadowColor: '#6d28d9',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.12,
+    shadowRadius: 12,
+    elevation: 6,
+    borderWidth: 1,
+    borderColor: '#f0e6ff',
   },
   cardHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 16,
-    paddingBottom: 12,
+    marginBottom: 12,
   },
   name: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#2a0f3d',
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#1e1b4b',
     flex: 1,
   },
   semesterBadge: {
-    backgroundColor: '#ffe6f0',
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 20,
+    backgroundColor: '#ddd6fe',
+    paddingHorizontal: 14,
+    paddingVertical: 7,
+    borderRadius: 30,
   },
   semesterText: {
-    color: '#d6306d',
+    color: '#6d28d9',
+    fontWeight: '700',
     fontSize: 12,
-    fontWeight: '600',
   },
-  cardBody: {
-    paddingHorizontal: 16,
-    paddingBottom: 16,
-  },
+
+  cardBody: { marginTop: 8 },
   infoRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingVertical: 8,
   },
-  infoLabel: {
-    fontSize: 14,
-    color: '#b8668c',
-  },
-  infoValue: {
-    fontSize: 14,
-    color: '#2a0f3d',
-    fontWeight: '500',
-  },
-  infoDivider: {
-    height: 1,
-    backgroundColor: '#fff0f5',
-  },
-  emptyContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 60,
-  },
-  emptyTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#d6306d',
-    marginBottom: 8,
-  },
-  emptySubtitle: {
-    fontSize: 14,
-    color: '#b8668c',
-    marginBottom: 24,
-  },
+  infoLabel: { fontSize: 14, color: '#94a3b8' },
+  infoValue: { fontSize: 15, fontWeight: '600', color: '#1e1b4b' },
+  divider: { height: 1, backgroundColor: '#e2e8f0', marginVertical: 4 },
+
+  emptyContainer: { alignItems: 'center', paddingVertical: 80 },
+  emptyTitle: { fontSize: 20, fontWeight: '700', color: '#6d28d9', marginBottom: 8 },
+  emptySubtitle: { fontSize: 14, color: '#94a3b8', marginBottom: 24 },
   retryButton: {
-    backgroundColor: '#d6306d',
-    paddingHorizontal: 24,
-    paddingVertical: 12,
-    borderRadius: 12,
-    shadowColor: '#d6306d',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 4,
-    elevation: 3,
+    backgroundColor: '#6d28d9',
+    paddingHorizontal: 28,
+    paddingVertical: 14,
+    borderRadius: 16,
+    elevation: 4,
   },
-  retryButtonText: {
-    color: '#fff',
-    fontWeight: '600',
-    fontSize: 14,
-  },
+  retryButtonText: { color: '#fff', fontWeight: '700', fontSize: 15 },
 });
 
 export default HomeScreen;
