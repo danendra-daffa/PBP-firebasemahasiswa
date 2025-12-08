@@ -1,6 +1,5 @@
 /**
  * Minimal sanity test for PBP-firebasemahasiswa
- * Unique description added by Danendra Daffa so file differs from common templates.
  * This test intentionally avoids importing React or external test renderers to
  * prevent missing-dependency errors on machines that don't have devDependencies installed.
  */
