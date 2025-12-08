@@ -1,3 +1,7 @@
+/**
+ * HomeScreen.js
+ * Simple header added by Danendra Daffa to show ownership without changing logic.
+ */
 import React, { useState, useEffect } from 'react';
 import {
   View,

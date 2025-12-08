@@ -1,3 +1,7 @@
+/**
+ * PBP-firebasemahasiswa — modified by Danendra Daffa
+ * This file header was added to personalize the project and remove template traces.
+ */
 import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';

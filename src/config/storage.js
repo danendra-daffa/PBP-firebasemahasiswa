@@ -1,3 +1,7 @@
+/**
+ * storage.js
+ * MMKV wrapper — header added by Danendra Daffa to personalize project files.
+ */
 import { MMKV } from 'react-native-mmkv';
 
 // Inisialisasi MMKV

@@ -1,3 +1,7 @@
+/**
+ * authService.js
+ * Modified by Danendra Daffa — small header added to personalize project files.
+ */
 import auth from '@react-native-firebase/auth';
 import { saveUserData, clearUserData } from '../config/storage';
 

@@ -1,3 +1,7 @@
+/**
+ * LoginScreen.js
+ * UI for login/register. Minor header added by Danendra Daffa to personalize files.
+ */
 import React, { useState } from 'react';
 import {
   View,

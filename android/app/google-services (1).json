@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "982547028880",
+    "project_id": "fir-mahasiswa-c3090",
+    "storage_bucket": "fir-mahasiswa-c3090.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:982547028880:android:7dddc45aec0b3ecc847115",
+        "android_client_info": {
+          "package_name": "com.tugasfirebasemahasiswa"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmEZl74bYZXJOPDPg8oORqQumXLD0QfpQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

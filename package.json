@@ -1,5 +1,6 @@
 {
   "name": "tugas-firebase-mahasiswa",
+  "description": "A React Native app for managing mahasiswa records (modified by Danendra Daffa)",
   "version": "0.0.1",
   "private": true,
   "author": "Danendra Daffa",

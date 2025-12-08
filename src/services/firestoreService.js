@@ -1,3 +1,7 @@
+/**
+ * firestoreService.js
+ * Modified by Danendra Daffa — header added to indicate personalization.
+ */
 import firestore from '@react-native-firebase/firestore';
 
 /**
